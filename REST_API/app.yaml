@@ -1,0 +1,28 @@
+# Use the PHP 7.3 runtime (BETA) by replacing "php72" below with "php73"
+runtime: php73
+
+# Defaults to "serve connection.php" and "serve public/connection.php". Can be used to
+# serve a custom PHP front controller (e.g. "serve backend/connection.php") or to
+# run a long-running PHP script as a worker process (e.g. "php worker.php").
+#
+# Serve your app through a front controller at connection.php or public/connection.php.
+runtime_config:
+  document_root: .
+
+handlers:
+
+- url: /.*
+  script: auto
+
+entrypoint:
+  serve handler.php
+
+
+env_variables:
+  # Replace USER, PASSWORD, DATABASE, and CONNECTION_NAME with the
+  # values obtained when configuring your Cloud SQL instance.
+  CLOUDSQL_USER: jupiter
+  CLOUDSQL_DB: JTGDB
+  CLOUDSQL_PASSWORD: 123456
+  CLOUDSQL_DSN: /cloudsql/vast-service-281617:us-central1:jtgdb
+# [END gae_cloudsql_mysql_env]
